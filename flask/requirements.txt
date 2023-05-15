@@ -1,0 +1,11 @@
+flask
+flask-jwt-extended
+flask-restful
+Flask-SQLAlchemy
+redis
+celery[redis]
+flask-mail
+pandas
+flask-caching
+jinja2
+weasyprint

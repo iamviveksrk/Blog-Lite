@@ -1,0 +1,260 @@
+@import url("https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap");
+*,
+*:after,
+*:before {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "DM Sans", sans-serif;
+  line-height: 1.5;
+  background-color: #f1f3fb;
+  padding: 0 2rem;
+}
+
+.app-container{
+  max-width: 1400px;
+  margin : 0 auto;
+}
+
+.post-grid {
+  display : grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap : 15px;
+  justify-content: center;
+}
+
+@media screen and (max-width:1200px) {
+  .post-grid {
+    display : grid;
+    grid-template-columns: 1fr;
+    justify-content: center;
+  }
+}
+
+.horizontal-flex-container {
+  display : flex;
+  flex-direction: row;
+  gap : 10px;
+}
+
+.btn-container {
+  display : flex;
+  flex-direction: row;
+  gap : 3px;
+  padding-top: 10px;
+  justify-content: left;
+  position: relative;
+  cursor: pointer;
+  font-size: 22px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* Hide the browser's default radio button */
+.btn-container input {
+  position: absolute;
+  top: -2px;
+  left: -6px;
+  height: 20px;
+  width: 20px;
+  border-radius: 50%;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.checkmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 20px;
+  width: 20px;
+  border-radius: 50%;
+  display: block;
+}
+
+/* Create the indicator (the dot/circle - hidden when not checked) */
+.checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+/* Show the indicator (dot/circle) when checked */
+.btn-container input:checked ~ .checkmark:after {
+  display: block;
+}
+
+/* Style the indicator (dot/circle) */
+.btn-container .checkmark:after {
+ 	top: 9px;
+	left: 9px;
+	width: 8px;
+	height: 8px;
+	border-radius: 50%;
+	background: white;
+}
+
+.vertical-flex-container {
+  display : flex;
+  flex-direction: column;
+  gap : -5x;
+  justify-content: center;
+}
+
+
+.card {
+  margin: 2rem auto;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 10px 20px 0 rgba(153, 153, 153, 0.25);
+  padding: 0.75rem;
+}
+
+
+.card-image {
+  border-radius: 8px;
+  overflow: hidden;
+  padding-bottom: 65%;
+  background-image: url("https://assets.codepen.io/285131/coffee_1.jpg");
+  background-repeat: no-repeat;
+  background-size: 150%;
+  background-position: 0 5%;
+  position: relative;
+}
+
+.card-heading {
+  left: 10%;
+  top: 15%;
+  right: 10%;
+  font-size: 1.25rem;
+  line-height: 1.222;
+  color : #6658d3
+}
+
+.card span {
+  position: relative;
+  align-self: center;
+  color: #404060;
+}
+
+.card-form {
+  padding: 2rem 1rem 0;
+  max-width: 300px;
+  overflow: hidden;
+}
+
+.avatar-card-form {
+  padding: 2rem 1rem 0;
+  max-width: 500px;
+  overflow-y: auto;
+  max-height: 400px;
+}
+
+.card-profile {
+  padding: 1rem 0.75rem 0.75rem;
+  max-width: 300px;
+}
+
+.form-radio {
+  border-radius: 100%;
+  border-width: 2px;
+}
+.form-radio:checked {
+  background-image: url("data:image/svg+xml,%3csvg viewBox='0 0 16 16' fill='white' xmlns='http://www.w3.org/2000/svg'%3e%3ccircle cx='8' cy='8' r='3'/%3e%3c/svg%3e");
+  background-size: 100% 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+.form-radio:focus {
+  outline: none;
+}
+
+.unfollow-button {
+  font-size: 0.75rem;
+  padding: 0.5em;
+  width: 80%;
+  font-weight: 400;
+  background-color: #f1f3fb;
+  color: #6658d3;
+  border-radius: 6px;
+  border: 0;
+  cursor:pointer;
+}
+
+.follow-button {
+  font-size: 0.75rem;
+  padding: 0.5em;
+  width: 80%;
+  font-weight: 400;
+  background-color: #6658d3;
+  color: #f1f3fb;
+  border-radius: 6px;
+  border: 0;
+  cursor:pointer;
+}
+
+
+.card-info {
+  padding: 0.5rem 0.5rem;
+  font-size: 0.6rem;
+  text-align: center;
+  color: #8597a3;
+}
+
+.card-text {
+  text-align: center;
+  font-size: 0.7rem;
+  color: #2c3032;
+}
+
+.card-info-warning {
+  font-size: 0.6rem;
+  color: #8B8000;
+}
+
+.card-info a {
+  display: block;
+  color: #6658d3;
+  text-decoration: none;
+  font-weight: 300;
+}
+
+a.router-link-exact-active {
+  color: #6658d3;
+  pointer-events: none;
+}
+
+
+.profile-title a{
+  text-decoration: none;
+  color: #404089;
+  font-weight: 500;
+  font-size: 1.5em;
+  transition: 0.15s ease;
+}
+
+.profile-title a:hover, .profile-title {
+  text-align: center;
+  color: #434ce8;
+}
+
+.profile-edit-icon {
+  position: absolute;
+  margin: 0 250px;
+}
+
+.profile-export-icon {
+  position: absolute;
+  margin: -15px -5px;
+}
+
+.profile-delete-icon {
+  position: absolute;
+  margin: 0 200px;
+}

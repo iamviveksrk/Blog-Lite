@@ -1,0 +1,61 @@
+<html>
+  <head>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700" rel="stylesheet" type="text/css">
+
+    <style>
+      body {
+        font-family: 'DM Sans', sans-serif;
+      }
+    </style>
+  </head>
+  <body>
+    <table cellpadding="0" cellspacing="0" width="100%" border="0">
+      <tr>
+          <td align="center" style="padding-bottom: 50px; padding-top: 50px;">
+            <img src="https://i.imgur.com/xXXEsQt.png" alt="Sandigram's Awesome Logo :)">
+          </td>
+          <tr>
+            <td align="center">
+              <div class="heading" style="font-size: 30px;line-height: 1.222;font-weight: 500;padding-bottom: 50px;">
+                <b style="color:#6658d3">{{ username }}</b>'s Monthly Engagement Report
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <div class="content" style="padding: 20px 50px;font-size: 20px;">
+                Number of blogs posted: <b>{{ month_post_count }}</b>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td> 
+              <div class="content" style="padding: 20px 50px;font-size: 20px;">
+                New Followers: <b>{{ month_followers.count() }}</b>
+                <ul>
+                  {% for follower in month_followers %}
+                  <li>{{ follower.follower }}</li>
+                  {% endfor %}
+                </ul>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <div class="content" style="padding: 20px 50px;font-size: 20px;">
+                New Accounts you have followed: <b>{{ month_followed.count() }}</b>
+                <ul>
+                  {% for following in month_followed %}
+                  <li>{{ following.following }}</li>
+                  {% endfor %}
+                </ul>
+              </div>
+            </td>
+          </tr>
+      </tr>
+  </table>
+  </body>
+</html>
+

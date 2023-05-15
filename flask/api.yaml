@@ -1,0 +1,315 @@
+openapi: 3.0.0
+info:
+  description: "API Definitions for the Bloglite application, built by `Vivek Sivaramakrishnan`"
+  version: 1.0.0
+  title: Sandigram
+  contact: 
+    email : "21f2000045@ds.study.iitm.ac.in"
+
+security:
+ - auth_token : []
+
+tags:
+  - name: UserAuth
+    description: User Authentication and Management
+  - name: Actions
+  - name: PostOps
+paths:
+  /register:
+    post:
+      tags:
+        - UserAuth
+      summary: Create a new user account
+      description: Atfer creation of account, the route returns tokens that can be used for authentication.
+      operationId: register
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/User"
+        description: Created user object
+        required: true
+      responses:
+        default:
+          description: successful operation
+  /login:
+    post:
+      tags:
+        - UserAuth
+      summary: Logs in user
+      description: Returns authentication tokens upon successful verification of account details.
+      operationId: login
+      requestBody:
+        $ref: "#/components/requestBodies/UserAuth"
+      responses:
+        "200":
+          description: successful operation
+          headers:
+            Authorization:
+              description: auth token
+              schema:
+                type: string
+          content:
+            application/json:
+              schema: 
+                $ref: "#/components/schemas/User"
+        "400":
+          description: Invalid username/password supplied
+  /search/{query}:
+    get:
+      tags:
+        - Actions
+      summary: Search for users
+      parameters:
+        - name : query
+          in : path
+          description: username search query
+          required : true
+          schema:
+            type : string
+      responses:
+        '201':
+          description: "search successful"
+  /follow:
+    post:
+      tags:
+        - Actions
+      summary: Follow a user
+      description: ""
+      requestBody:
+       content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              username:
+                type: string
+      responses:
+        default:
+          description: successful operation
+  /unfollow:
+    post:
+      tags:
+        - Actions
+      summary: Unfollow a user
+      description: ""
+      requestBody:
+       content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              username:
+                type: string
+      responses:
+        default:
+          description: successful operation
+  /{username}/following:
+    get:
+      tags:
+        - Actions
+      parameters:
+        - name : username
+          in : path
+          description: accounts' followings in interest
+          required : true
+          schema:
+            type : string
+      summary: Get details of accounts followed by user
+      responses:
+        default:
+          description: successful operation
+  /{username}/followers:
+    get:
+      tags:
+        - Actions
+      parameters:
+        - name : username
+          in : path
+          description: accounts' followers in interest
+          required : true
+          schema:
+            type : string
+      summary: Get details of accounts following user
+      responses:
+        default:
+          description: successful operation
+  /{username}/info:
+    get:
+      tags:
+        - Actions
+      parameters:
+        - name : username
+          in : path
+          description: accounts' followers in interest
+          required : true
+          schema:
+            type : string
+      summary: Get profile information of a user
+      responses:
+        default:
+          description: successful operation
+  /feed:
+    get:
+      tags:
+        - PostOps
+      summary: Get list of post ids' for a user's feed
+      responses:
+        default:
+          description: successful operation
+  
+  /post:
+    get:
+      tags:
+        - PostOps
+      summary: Get post information
+      parameters:
+        - in: query
+          name: post_id
+          schema:
+            type: integer
+          required: true
+          description: Numeric ID of the post to get
+      description: ""
+      responses:
+        default:
+          description: successful operation
+    post:
+      tags:
+       - PostOps
+      summary: Create a new post
+      requestBody:
+        content: 
+          multipart/form-data: # Media type
+            schema:            # Request payload
+              type: object
+              properties:      # Request parts
+                title:            # Part 1 (string value)
+                  type: string
+                caption:            # Part 1 (string value)
+                  type: string
+                private:            # Part 1 (string value)
+                  type: string
+                image:  # Part 3 (an image)
+                  type: string
+                  format: binary
+      responses:
+        default:
+          description: successful operation
+    put:
+      tags:
+       - PostOps
+      summary: Update an existing post
+      requestBody:
+        content: 
+          multipart/form-data: # Media type
+            schema:            # Request payload
+              type: object
+              properties:      # Request parts
+                post_id:
+                  type: integer
+                title:            # Part 1 (string value)
+                  type: string
+                caption:            # Part 1 (string value)
+                  type: string
+                private:            # Part 1 (string value)
+                  type: string
+      responses:
+        default:
+          description: successful operation
+    delete:
+      tags:
+        - PostOps
+      summary: Delete a post
+      parameters:
+        - in: query
+          name: post_id
+          schema:
+            type: integer
+          required: true
+          description: Numeric ID of the user to delete
+      description: ""
+      responses:
+        default:
+          description: successful operation
+  /user/export:
+    get:
+      tags:
+        - PostOps
+      summary: Get post information
+      description: ""
+      responses:
+        default:
+          description: successful operation
+  
+externalDocs:
+  description: Find out more about Swagger
+  url: http://swagger.io
+servers:
+  - url: https://192.168.11.75:5000
+components:
+  requestBodies:
+    UserAuth:
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              username:
+                type: string
+              password:
+                type: string
+      required: true
+  schemas:
+    User:
+      type: object
+      properties:
+        message:
+          type: string
+        access_token:
+          type: string
+        refresh_token:
+          type: string
+        username:
+          type: string
+        avatar:
+          type: string
+        bio:
+          type: string
+      xml:
+        name: User
+    Category:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        name:
+          type: string
+      xml:
+        name: Category
+    Tag:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        name:
+          type: string
+      xml:
+        name: Tag
+    ApiResponse:
+      type: object
+      properties:
+        code:
+          type: integer
+          format: int32
+        type:
+          type: string
+        message:
+          type: string
+  securitySchemes:
+    auth_token:
+      type: apiKey
+      name: Authorization
+      in: header

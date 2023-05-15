@@ -11,10 +11,10 @@ View the video demonstration [here](https://www.youtube.com/watch?v=qZYJvwUV7nc)
 - Redis - NoSQL backend used for Celery event management and caching 
 - Flask-mail, Jinja2, Weasyprint, Pandas - Jobs requiring user exports, bulk-emails, and time-scheduled actions
 ## DB Schema Design
-![DB_Schema](vue\src\assets\dbschema.png)
+![DB_Schema](vue/src/assets/dbschema.png)
 Every post has a unique user associated as its creator, A user can follow many other users, and vice versa. The schema also stores data regarding the users’ avatar (display picture) in the userinfo relation. To serve and realise the described context, the above schema has been idealised and implemented.
 ## API Design
-![Api_Declaration](vue\src\assets\api_declaration.png)
+![Api_Declaration](vue/src/assets/api_declaration.png)
 ## Architecture and Features
 The project has a high-level split into the folders ”flask” and ”vue”, which house the front-end and back-end of the application respectively. 
 ### Flask back-end
